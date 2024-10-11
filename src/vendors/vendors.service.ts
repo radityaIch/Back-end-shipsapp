@@ -69,7 +69,7 @@ export class VendorsService {
       .then((data) => ({
         status: 'success',
         code: '200',
-        id: data.id
+        id: data.id,
       }));
   }
 }

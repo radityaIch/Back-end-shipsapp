@@ -32,13 +32,17 @@ export class PengirimanController {
   @Get()
   @ApiOkResponse({ type: GetPengirimanDto })
   async findAll() {
-    return GetPengirimanDto.zodSchema.parse(await this.pengirimanService.findAll());
+    return GetPengirimanDto.zodSchema.parse(
+      await this.pengirimanService.findAll(),
+    );
   }
 
   @Get(':id')
   @ApiOkResponse({ type: GetOnePengirimanDto })
   async findOne(@Param('id') id: string) {
-    return GetOnePengirimanDto.zodSchema.parse(await this.pengirimanService.findOne(id));
+    return GetOnePengirimanDto.zodSchema.parse(
+      await this.pengirimanService.findOne(id),
+    );
   }
 
   @Patch(':id')
@@ -46,7 +50,9 @@ export class PengirimanController {
     @Param('id') id: string,
     @Body() updatePengirimanDto: UpdatePengirimanDto,
   ) {
-    return UpdatePengirimanDto.zodSchema.parse(this.pengirimanService.update(id, updatePengirimanDto));
+    return UpdatePengirimanDto.zodSchema.parse(
+      this.pengirimanService.update(id, updatePengirimanDto),
+    );
   }
 
   @Delete(':id')

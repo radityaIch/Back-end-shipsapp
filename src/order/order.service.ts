@@ -23,15 +23,29 @@ export class OrderService {
       },
     });
 
+    const order = await this.prisma.order.findUnique({
+      where: {
+        id: data.id,
+      },
+      include: {
+        pengiriman: {
+          include: {
+            Vendor: true,
+          },
+        },
+      },
+    });
+
     const isSuccessSendEmail = await this.mailService.sendMail({
-      from: 'Sarana Logistic <raditya2678@gmail.com>',
-      bcc: ['raditya2678@gmail.com'],
+      from: `${order.pengiriman.Vendor.nama} [Sarana Logistic] <raditya2678@gmail.com>`,
+      bcc: ['rizkyaditya.ich@gmail.com'],
       subject: `Pengadaan Barang Baru`,
       html: `
       <p>Order Id: ${data.pengiriman_id}</p>
       <p>Dimensi: ${data.panjang} x ${data.lebar} x ${data.tinggi}</p>
       <p>Koli: ${data.koli}</p>
       <p>Biaya Pengiriman: ${data.biaya_pengiriman}</p>
+      <p>Dari: Jawa Barat, Ke: Jawa Timur</p>
       `,
     });
 
@@ -58,7 +72,7 @@ export class OrderService {
       include: {
         pengiriman: true,
       },
-    });;
+    });
   }
 
   update(id: number, updateOrderDto: UpdateOrderDto) {

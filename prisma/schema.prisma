@@ -63,3 +63,53 @@ model Pengiriman {
   vendorId              String?
   Order                 Order[]
 }
+
+model Pelabuhan {
+  id                 String          @id @default(cuid())
+  kode_pelabuhan     String?         @db.VarChar(255)
+  url_gambar         String          @db.VarChar(255)
+  nama_pelabuhan     String          @db.VarChar(255)
+  lokasi_pelabuhan   LokasiPelabuhan @relation(fields: [lokasi_pelabuhanId], references: [id])
+  lokasi_pelabuhanId String
+  shipagents         Shipagent[]
+  bunker_services    BunkerService[]
+  marine_services    MarineService[]
+  logistiks          Logistik[]
+  truckings          Trucking[]
+}
+
+model LokasiPelabuhan {
+  id        String      @id @default(cuid())
+  nama      String      @unique @db.VarChar(255)
+  pelabuhan Pelabuhan[]
+}
+
+model Shipagent {
+  id         String      @id @default(cuid())
+  nama       String      @unique
+  pelabuhans Pelabuhan[]
+}
+
+model BunkerService {
+  id         String      @id @default(cuid())
+  nama       String      @unique
+  pelabuhans Pelabuhan[]
+}
+
+model MarineService {
+  id         String      @id @default(cuid())
+  nama       String      @unique
+  pelabuhans Pelabuhan[]
+}
+
+model Logistik {
+  id         String      @id @default(cuid())
+  nama       String      @unique
+  pelabuhans Pelabuhan[]
+}
+
+model Trucking {
+  id         String      @id @default(cuid())
+  nama       String      @unique
+  pelabuhans Pelabuhan[]
+}

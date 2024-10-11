@@ -12,6 +12,13 @@ import { PengirimanModule } from './pengiriman/pengiriman.module';
 import { PrismaModule } from './prisma.module';
 import { OrderModule } from './order/order.module';
 import { MailerModule } from '@nestjs-modules/mailer';
+import { PelabuhanModule } from './pelabuhan/pelabuhan.module';
+import { LokasiPelabuhanModule } from './lokasi_pelabuhan/lokasi_pelabuhan.module';
+import { ShipagentModule } from './shipagent/shipagent.module';
+import { BunkerServiceModule } from './bunker_service/bunker_service.module';
+import { MarineServiceModule } from './marine_service/marine_service.module';
+import { LogistikModule } from './logistik/logistik.module';
+import { TruckingModule } from './trucking/trucking.module';
 
 @Module({
   imports: [
@@ -29,6 +36,13 @@ import { MailerModule } from '@nestjs-modules/mailer';
         },
       },
     }),
+    PelabuhanModule,
+    LokasiPelabuhanModule,
+    ShipagentModule,
+    BunkerServiceModule,
+    MarineServiceModule,
+    LogistikModule,
+    TruckingModule,
   ],
   controllers: [AppController, DeliveryController],
   providers: [

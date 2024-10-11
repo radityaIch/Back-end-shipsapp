@@ -72,12 +72,11 @@ export class DeliveryService {
         },
       });
       this.companies = vendors; // Assign the retrieved data to the companies property
-       // Log the companies property
+      // Log the companies property
     } catch (error) {
       console.error('Error fetching vendors:', error);
     }
   }
-
 
   selectDeliveryCompany(criteria: any): any {
     // Filter perusahaan berdasarkan kriteria
@@ -85,10 +84,8 @@ export class DeliveryService {
       .map((company) => {
         const matchingShipments = company.list_pengiriman.filter(
           (shipment) =>
-            shipment.provinsi_awal ===
-              criteria.lokasi_awal &&
-              shipment.provinsi_tujuan ===
-                criteria.lokasi_akhir,
+            shipment.provinsi_awal === criteria.lokasi_awal &&
+            shipment.provinsi_tujuan === criteria.lokasi_akhir,
         );
         if (matchingShipments.length > 0) {
           return {
